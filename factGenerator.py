@@ -1,20 +1,31 @@
 from knowledgeBase import *
 from pyknow import *
 
+def specificityScoring(specificity):
+    ''' Define some rules to score the sensitivity'''
+    return 0
+
+def sensitivyScoring(sensistivity):
+    ''' Define some rules to score the sensitivity'''
+    return 0
+
 def ETS(executionTime):
+    ''' Define some rules to score the execution time'''
     if executionTime < 500:
         return 10
     else:
         return 0
 
 def TTS(trainingTime):
+    ''' Define some rules to score the training time'''
     if trainingTime < 1000:
         return 10
     else:
         return 0
     return None
-   
+
 def AccuracyScoring(accuracy):
+    ''' Define some rules to score the accuracy'''
     if accuracy < 0.1:
         return 0
     elif accuracy < 0.2:
@@ -38,8 +49,12 @@ def AccuracyScoring(accuracy):
     else:
         return 10
         
-def GenerateFacts(engine, algorithm):
+def GenerateFacts(engine, algorithm, algoNumber):
+    ''' Generate the facts about one algorithm in the knowledge base'''
+    engine.declare(Fact(algo = algoNumber))
     engine.declare(Fact(accuracyScore = AccuracyScoring(algorithm.accuracy)))
     engine.declare(Fact(traingTimeScore = TTS(algorithm.trainingTime)))
     engine.declare(Fact(executionTimeScore = ETS(algorithm.executionTime)))
+    engine.declare(Fact(specificity  = specificityScoring(algorithm.specificity)))
+    engine.declare(Fact(sensitivity = sensitivyScoring(algorithm.sensitivity)))
     
