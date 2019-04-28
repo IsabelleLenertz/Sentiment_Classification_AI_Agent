@@ -49,9 +49,8 @@ def AccuracyScoring(accuracy):
     else:
         return 10
         
-def GenerateFacts(engine, algorithm, algoNumber):
+def GenerateFacts(engine, algorithm):
     ''' Generate the facts about one algorithm in the knowledge base'''
-    engine.declare(Fact(algo = algoNumber))
     engine.declare(Fact(accuracyScore = AccuracyScoring(algorithm.accuracy)))
     engine.declare(Fact(traingTimeScore = TTS(algorithm.trainingTime)))
     engine.declare(Fact(executionTimeScore = ETS(algorithm.executionTime)))

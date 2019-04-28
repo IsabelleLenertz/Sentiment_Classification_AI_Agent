@@ -1,6 +1,11 @@
-from knowledgeBase import *
+import knowledgeBase
+import factGenerator
 from pyknow import *
-from factGenerator import *
+
+""" Makes sure changes in imported files are carried out"""
+import importlib
+importlib.reload(knowledgeBase)
+importlib.reload(factGenerator)
 
 
 class Algorithm():
@@ -12,22 +17,46 @@ class Algorithm():
         self.sensitivity = sensitivity
         self.specificity = specificity
 
+""" Introduction to the AI agent """
+print("Welcome to our smart classifier")
+print("The AI agent classifies messages as positive and negative using sentiment analysis")
+print("Would you prefer the algorithm to be as precise as possible or as fast as possible?")
 
  # run algo 1, return classifier and performance info
  
  # run algo 2, return classifier and performance info
  
- #Get user's choice of most important feature
+ # Get user's choice of most important feature
+userChoice = "";
+while(userChoice != "p" and userChoice != "s"):
+    userChoice = input("[p]recision, [s]peed: ")
  
 algo1 = Algorithm('classifier', 1, 1, 0.3, 0.9, 0.9) #for testing purposes
 algo2 = Algorithm('classifier', 1, 1, 0.3, 0.9, 0.9) #for testing purposes
+scores = {};
 
-engine = ScoreAlgorithm();
+""" Run and score the first algorithm"""
+engine = factGenerator.ScoreAlgorithm();
 engine.reset();
-GenerateFacts(engine, algo1, 1)
+engine.declare(Fact(userChoice));
+factGenerator.GenerateFacts(engine, algo1)
 engine.run();
+scores[algo1] = knowledgeBase.score
+knowledgeBase.score = 0
 
-engine2 = ScoreAlgorithm();
+""" Run and score the second algorithm"""
+engine2 = factGenerator.ScoreAlgorithm();
 engine2.reset();
-GenerateFacts(engine2, algo2, 2)
+engine.declare(Fact(userChoice));
+factGenerator.GenerateFacts(engine2, algo2)
 engine2.run();
+scores[algo2] = knowledgeBase.score
+knowledgeBase.score = 0
+
+""" Get the algorithm with the highest score """
+chosenAlgo = max(scores, key = lambda k: scores[k])
+print("Recommending: " + chosenAlgo.classifier)
+
+""" Asking for text to  classify and classify it """
+text = input("enter the text you want to classify: ")
+#TODO classify
