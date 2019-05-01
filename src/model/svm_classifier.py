@@ -23,7 +23,7 @@ def main():
 def model():
     start = time.time()
     features = []
-    with open("si650winter11/training.csv", 'r') as file:
+    with open("../../Data/training.csv", 'r') as file:
         lines = csv.reader(file, delimiter = ',')
         for line in lines:
             class_label, sentence = line

@@ -7,7 +7,6 @@ import numpy as np
 import pandas as pd
 from textblob import TextBlob
 import csv, collections, os
-import exp_replace
 
 
 def feature_extraction(sentence):
