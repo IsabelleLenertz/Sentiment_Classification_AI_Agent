@@ -77,11 +77,7 @@ def model():
     execution_time = float(end-start)
     print('Execution time in seconds', execution_time)
 
-    return accuracy, sensitivity, specificity, execution_time
-
-
-
-
+    return clf, accuracy, sensitivity, specificity, execution_time
 
 if __name__ == "__main__":
     main()
