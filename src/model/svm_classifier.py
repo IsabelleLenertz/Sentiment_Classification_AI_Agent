@@ -7,7 +7,7 @@ import math
 import time
 import numpy as np
 import pandas as pd
-import model.sentiment_analysis
+import model.sentiment_analysis as sentiment_analysis
 from sklearn import svm
 from sklearn.utils import shuffle
 from sklearn.feature_extraction import DictVectorizer
@@ -23,7 +23,7 @@ def main():
 def model():
     start = time.time()
     features = []
-    with open("../../training.csv", 'r') as file:
+    with open("../Data/training.csv", 'r') as file:
         lines = csv.reader(file, delimiter = ',')
         for line in lines:
             class_label, sentence = line
@@ -78,6 +78,8 @@ def model():
     print('Execution time in seconds', execution_time)
 
     return clf, accuracy, sensitivity, specificity, execution_time
+
+
 
 if __name__ == "__main__":
     main()

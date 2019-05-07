@@ -25,9 +25,9 @@ print("The AI agent classifies messages as positive and negative using sentiment
 print("Would you prefer the algorithm to be as precise as possible or as fast as possible?")
 
  # run algo 1, return classifier and performance info
- 
+
  # run algo 2, return classifier and performance info
- 
+
  # Get user's choice of most important feature
 userChoice = "";
 while(userChoice != "p" and userChoice != "s"):
@@ -38,7 +38,7 @@ print("Creating new models...");
 print("... please wait...");
 
 #create svm model
-accuracy, sensitivity, specificity, execution_time = svm_classifier.model();
+classifier, accuracy, sensitivity, specificity, execution_time = svm_classifier.model();
 algo1 = Algorithm('classifier', accuracy, 1, execution_time,sensitivity, specificity) #for testing purposes
 algo2 = Algorithm('classifier', 1, 1, 0.3, 0.9, 0.9) #for testing purposes
 scores = {};
