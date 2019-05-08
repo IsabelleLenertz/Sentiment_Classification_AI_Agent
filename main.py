@@ -1,6 +1,6 @@
 import knowledgeBase
 import factGenerator
-import model.svm_classifier as svm_classifier
+import svm_classifier as svm_classifier
 from pyknow import *
 
 """ Makes sure changes in imported files are carried out"""
