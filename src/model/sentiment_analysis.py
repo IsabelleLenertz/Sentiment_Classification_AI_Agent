@@ -7,6 +7,8 @@ import numpy as np
 import pandas as pd
 from textblob import TextBlob
 import csv, collections, os
+nltk.download('punkt')
+  
 
 
 def feature_extraction(sentence):
