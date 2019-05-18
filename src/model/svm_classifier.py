@@ -7,7 +7,7 @@ import math
 import time
 import numpy as np
 import pandas as pd
-import model.sentiment_analysis as sentiment_analysis
+#import model.sentiment_analysis as sentiment_analysis
 from sklearn import svm
 from sklearn.utils import shuffle
 from sklearn.feature_extraction import DictVectorizer
@@ -23,11 +23,14 @@ def main():
 def model():
     start = time.time()
     features = []
-    with open("../Data/training.csv", 'r') as file:
+    with open("../../Data/norm_dist_training.csv", 'r') as file:
         lines = csv.reader(file, delimiter = ',')
         for line in lines:
-            class_label, sentence = line
-            features.append((sentiment_analysis.feature_extraction(sentence), class_label))
+            index, ClassLabel, Sentence, SentimentScore, SubjectivityScore = line
+            feature = {}
+            feature['Blob sentiment'] = SentimentScore
+            feature['Blob subjectivity'] = SubjectivityScore
+            features.append((feature, ClassLabel))
 
     featuresets=np.array(features)
     targets=(featuresets[0::,1])
