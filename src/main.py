@@ -11,10 +11,9 @@ importlib.reload(svm_classifier)
 
 
 class Algorithm():
-    def __init__(self, classifier, accuracy, trainingTime, executionTime, sensitivity, specificity):
+    def __init__(self, classifier, accuracy, executionTime, sensitivity, specificity):
         self.classifier = classifier
         self.accuracy = accuracy
-        self.trainingTime = trainingTime
         self.executionTime = executionTime
         self.sensitivity = sensitivity
         self.specificity = specificity
@@ -39,8 +38,8 @@ print("... please wait...");
 
 #create svm model
 classifier, accuracy, sensitivity, specificity, execution_time = svm_classifier.model();
-algo1 = Algorithm('classifier', accuracy, 1, execution_time,sensitivity, specificity) #for testing purposes
-algo2 = Algorithm('classifier', 1, 1, 0.3, 0.9, 0.9) #for testing purposes
+algo1 = Algorithm('classifier', accuracy, execution_time,sensitivity, specificity) #for testing purposes
+algo2 = Algorithm('classifier', 1, 0.3, 0.9, 0.9) #for testing purposes
 scores = {};
 
 """ Run and score the first algorithm"""
