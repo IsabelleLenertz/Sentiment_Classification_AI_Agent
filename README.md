@@ -9,8 +9,19 @@ Dependencies for SVM Classifier & Sentiment analysis:
 
 - pip install csv
 - pip install math
-- pip install time 
+- pip install time
 - pip install nltk
 - pip install numpy
 - pip install sklearn
 - pip install textblob
+
+Dependencies for Search:
+
+- pip install decimal
+- pip install pandas
+- pip install argparse
+- pip install itertools
+- pip install scipy
+- pip install matplotlib
+- pip install matplotlib
+- pip install sys
