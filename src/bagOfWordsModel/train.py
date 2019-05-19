@@ -2,7 +2,7 @@
 import os
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.ensemble import RandomForestClassifier
-from KaggleWord2VecUtility import KaggleWord2VecUtility
+from bagOfWordsModel.KaggleWord2VecUtility import KaggleWord2VecUtility
 import pandas as pd
 import numpy as np
 import nltk
@@ -15,9 +15,9 @@ def main():
     print(results)
 
 def model():
-    df_train = pd.read_csv("training.csv", header=0, delimiter="\t", quoting=3, names = ['sentiment', 'comment'])
-    df_test = pd.read_csv("testdata.csv", header=0, delimiter="\t", quoting=3, names = ['comment'])
-    df_test_label = pd.read_csv("l.csv")
+    df_train = pd.read_csv("bagOfWordsModel.training.csv", header=0, delimiter="\t", quoting=3, names = ['sentiment', 'comment'])
+    df_test = pd.read_csv("bagOfWordsModel.testdata.csv", header=0, delimiter="\t", quoting=3, names = ['comment'])
+    df_test_label = pd.read_csv("bagOfWordsModel.l.csv")
     labels = np.array(df_test_label)
     clean_data = []
     for i in range( 0, len(df_train["comment"])):
@@ -67,7 +67,7 @@ def model():
     output = pd.DataFrame( data={"sentiment":result} )
     
     # Use pandas to write the comma-separated output file
-    output.to_csv(os.path.join(os.path.dirname(__file__), '', 'Bag_of_Words_model.csv'), index=False, quoting=3)
+    output.to_csv(os.path.join(os.path.dirname(__file__), '', 'bagOfWordsModel.Bag_of_Words_model.csv'), index=False, quoting=3)
     print("Wrote results to Bag_of_Words_model.csv")
     
     count_correct_class = 0
