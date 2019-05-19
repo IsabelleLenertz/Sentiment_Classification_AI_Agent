@@ -71,12 +71,25 @@ def model():
     print("Wrote results to Bag_of_Words_model.csv")
     
     count_correct_class = 0
+    negative_count = 0
+    positive_count = 0
+    negative_correct_count = 0
     for i in range(len(result)):
         if result[i] == labels[i]:
             count_correct_class +=1
+            if labels[i] == 1:
+                negative_correct_count = +1
+            else:
+                positive_correct_count = +1
+        if labels[i] == 1:
+            negative_count = +1
+        if labels[i] == 0:
+            positive_count = +1
     accuracy = (count_correct_class)/1000
+    sensitivity = negative_correct_count/negative_count
+    sprcificity = positive_correct_count/positive_count
 
-    return accuracy
+    return accuracy, sensitivity, sprcificity
     
 if __name__ == "__main__":
     main()
