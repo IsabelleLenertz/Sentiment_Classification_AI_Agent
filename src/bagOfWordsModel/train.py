@@ -2,7 +2,7 @@
 import os
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.ensemble import RandomForestClassifier
-from bagOfWordsModel.KaggleWord2VecUtility import KaggleWord2VecUtility
+from KaggleWord2VecUtility import KaggleWord2VecUtility
 import pandas as pd
 import numpy as np
 import nltk
@@ -15,9 +15,9 @@ def main():
     print(results)
 
 def model():
-    df_train = pd.read_csv("bagOfWordsModel.training.csv", header=0, delimiter="\t", quoting=3, names = ['sentiment', 'comment'])
-    df_test = pd.read_csv("bagOfWordsModel.testdata.csv", header=0, delimiter="\t", quoting=3, names = ['comment'])
-    df_test_label = pd.read_csv("bagOfWordsModel.l.csv")
+    df_train = pd.read_csv("training.csv", header=0, delimiter="\t", quoting=3, names = ['sentiment', 'comment'])
+    df_test = pd.read_csv("testdata.csv", header=0, delimiter="\t", quoting=3, names = ['comment'])
+    df_test_label = pd.read_csv("l.csv")
     labels = np.array(df_test_label)
     clean_data = []
     for i in range( 0, len(df_train["comment"])):
@@ -34,7 +34,7 @@ def model():
     
     # ******* Train a random forest using the bag of words
         #
-    print("Training the random forest this may take a while \n")
+    # print("Training the random forest this may take a while \n")
     
     # Initialize a Random Forest classifier with 100 trees
     forest = RandomForestClassifier(n_estimators = 100)
@@ -50,7 +50,7 @@ def model():
     # Create an empty list and append the clean reviews one by one
     clean_test_reviews = []
     
-    print("Cleaning and parsing the test set movie reviews...\n")
+    # print("Cleaning and parsing the test set movie reviews...\n")
     for i in range(0,len(df_test["comment"])):
         clean_test_reviews.append(" ".join(KaggleWord2VecUtility.review_to_wordlist(df_test["comment"][i], True)))
     
@@ -59,7 +59,7 @@ def model():
     np.asarray(test_data_features)
     
     # Use the random forest to make sentiment label predictions
-    print("Predicting test labels...\n")
+    # print("Predicting test labels...\n")
     result = forest.predict(test_data_features)
     
     # Copy the results to a pandas dataframe with an "id" column and
@@ -67,22 +67,26 @@ def model():
     output = pd.DataFrame( data={"sentiment":result} )
     
     # Use pandas to write the comma-separated output file
-    output.to_csv(os.path.join(os.path.dirname(__file__), '', 'bagOfWordsModel.Bag_of_Words_model.csv'), index=False, quoting=3)
-    print("Wrote results to Bag_of_Words_model.csv")
+    output.to_csv(os.path.join(os.path.dirname(__file__), '', 'Bag_of_Words_model.csv'), index=False, quoting=3)
+    # print("Wrote results to Bag_of_Words_model.csv")
     
     count_correct_class = 0
     negative_count = 0
     positive_count = 0
     negative_correct_count = 0
+    # counitng correct matches in order to calculate accuracy
     for i in range(len(result)):
         if result[i] == labels[i]:
             count_correct_class +=1
+            #counitng correct negative and positive matches
             if labels[i] == 1:
                 negative_correct_count = +1
             else:
                 positive_correct_count = +1
+        #counitng total negative cases
         if labels[i] == 1:
             negative_count = +1
+        #counting total postive cases
         if labels[i] == 0:
             positive_count = +1
     accuracy = (count_correct_class)/1000
