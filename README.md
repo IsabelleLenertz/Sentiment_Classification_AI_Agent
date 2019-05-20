@@ -25,3 +25,6 @@ Dependencies for Search:
 - pip install matplotlib
 - pip install matplotlib
 - pip install sys
+
+Dependencies for nn bagOfWordsClassifier
+pip install KaggleWord2VecUtility

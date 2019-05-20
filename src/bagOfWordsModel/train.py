@@ -18,9 +18,9 @@ def main():
 
 def model():
     start = time.time()
-    df_train = pd.read_csv("training.csv", header=0, delimiter="\t", quoting=3, names = ['sentiment', 'comment'])
-    df_test = pd.read_csv("testdata.csv", header=0, delimiter="\t", quoting=3, names = ['comment'])
-    df_test_label = pd.read_csv("l.csv")
+    df_train = pd.read_csv("bagOfWordsModel/training.csv", header=0, delimiter="\t", quoting=3, names = ['sentiment', 'comment'])
+    df_test = pd.read_csv("bagOfWordsModel/testdata.csv", header=0, delimiter="\t", quoting=3, names = ['comment'])
+    df_test_label = pd.read_csv("bagOfWordsModel/l.csv")
     labels = np.array(df_test_label)
     clean_data = []
     for i in range( 0, len(df_train["comment"])):
@@ -32,8 +32,8 @@ def model():
                                 preprocessor = None, \
                                 stop_words = None,   \
                                 max_features = 5000)
-    train_data_features = vectorizer.fit_transform(clean_data)
-    np.asarray(train_data_features)
+    train_features = vectorizer.fit_transform(clean_data)
+    np.asarray(train_features)
     
     # ******* Train a random forest using the bag of words
         #
@@ -46,10 +46,10 @@ def model():
     # features and the sentiment labels as the response variable
     #
     # This may take a few minutes to run
-    forest = forest.fit( train_data_features, df_train["sentiment"] )
+    forest = forest.fit( train_features, df_train["sentiment"] )
     
     
-    
+
     # Create an empty list and append the clean reviews one by one
     clean_test_reviews = []
     
