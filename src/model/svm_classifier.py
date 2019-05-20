@@ -7,7 +7,6 @@ import math
 import time
 import numpy as np
 import pandas as pd
-#import model.sentiment_analysis as sentiment_analysis
 from sklearn import svm
 from sklearn.utils import shuffle
 from sklearn.feature_extraction import DictVectorizer
