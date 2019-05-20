@@ -28,3 +28,5 @@ Dependencies for Search:
 
 Dependencies for nn bagOfWordsClassifier
 pip install KaggleWord2VecUtility
+pip install bs4
+pip install scipy

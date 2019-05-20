@@ -94,11 +94,17 @@ def model():
             positive_count = +1
     accuracy = (count_correct_class)/1000
     sensitivity = negative_correct_count/negative_count
-    sprcificity = positive_correct_count/positive_count
+    specificity = positive_correct_count/positive_count
     end = time.time()
     execution_time = float(end-start)
     
-    return accuracy, sensitivity, sprcificity, execution_time
+    print("Accuracy of the bagOdWords classifier model: ", "{0:.2f}".format(accuracy))
+    print('Sensitivity : ', sensitivity )
+    print('Specificity : ', specificity)
+    print('Execution time in seconds', execution_time)
+
+
+    return accuracy, sensitivity, specificity, execution_time
     
 if __name__ == "__main__":
     main()
