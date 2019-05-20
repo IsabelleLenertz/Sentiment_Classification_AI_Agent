@@ -9,6 +9,8 @@ import importlib
 importlib.reload(knowledgeBase)
 importlib.reload(factGenerator)
 importlib.reload(svm_classifier)
+importlib.reload(bagOfWord)
+
 
 
 class Algorithm():
@@ -39,12 +41,14 @@ print("... please wait...");
 
 #create svm model
 classifier, accuracy, sensitivity, specificity, execution_time = svm_classifier.model();
-algo1 = Algorithm('classifier', accuracy, execution_time,sensitivity, specificity) #for testing purposes
+algo1 = Algorithm('classifier 1', accuracy, execution_time,sensitivity, specificity) #for testing purposes
 
 #create bag of world model
-accuracy = bagOfWord.model();
-algo2 = Algorithm('classifier', accuracy, 0.3, 0.9, 0.9) #for testing purposes
+accuracy, sensitivity, specificity, execution_time = bagOfWord.model();
+algo2 = Algorithm('classifier 2', accuracy, execution_time,sensitivity, specificity) #for testing purposes
 scores = {};
+
+print("Done training the models");
 
 """ Run and score the first algorithm"""
 engine = factGenerator.ScoreAlgorithm();
