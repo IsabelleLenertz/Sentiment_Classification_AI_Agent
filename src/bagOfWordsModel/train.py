@@ -2,10 +2,12 @@
 import os
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.ensemble import RandomForestClassifier
-from KaggleWord2VecUtility import KaggleWord2VecUtility
+from .KaggleWord2VecUtility import KaggleWord2VecUtility
 import pandas as pd
 import numpy as np
 import nltk
+import time
+
 # nltk.download()
 # import pandas as pd
 
@@ -15,6 +17,7 @@ def main():
     print(results)
 
 def model():
+    start = time.time()
     df_train = pd.read_csv("training.csv", header=0, delimiter="\t", quoting=3, names = ['sentiment', 'comment'])
     df_test = pd.read_csv("testdata.csv", header=0, delimiter="\t", quoting=3, names = ['comment'])
     df_test_label = pd.read_csv("l.csv")
@@ -92,8 +95,10 @@ def model():
     accuracy = (count_correct_class)/1000
     sensitivity = negative_correct_count/negative_count
     sprcificity = positive_correct_count/positive_count
-
-    return accuracy, sensitivity, sprcificity
+    end = time.time()
+    execution_time = float(end-start)
+    
+    return accuracy, sensitivity, sprcificity, execution_time
     
 if __name__ == "__main__":
     main()
