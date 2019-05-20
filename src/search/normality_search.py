@@ -4,7 +4,7 @@
 # Instruction to run the code:
 #
 # python normality_search.py -n <filename>
-# Example = python normality_search.py -n new_training.csv
+# Example = python normality_search.py -n ../../Data/feature_extracted_training.csv
 #
 
 import math
@@ -38,7 +38,7 @@ def main():
     columns = ['SentimentScore', 'SubjectivityScore']
 
     i = 0
-    cutoff_value = 2000
+    cutoff_value = 2100
     initial = 0
     final = 0
     while i < __ITERATIONS__:
@@ -53,24 +53,18 @@ def main():
         similarity_value, new_df = generate_histogram(df, columns, normality_value)
 
         if similarity_value > normality_value:
-            print(normality_value)
             normality_value = similarity_value
             normal_dist_df = new_df
             initial_index = initial
             final_index = final
-            print(df.head())
-            print(final_index)
     initial = initial + cutoff_value
     data_frame[initial_index:final_index].to_csv(r'../../Data/norm_dist_training.csv')
 
 def generate_histogram(df, columns, normality_value):
-    print(df.head())
 
     #Column reduction
     df_col_reduction = df
     df_col_reduction['red_col'] = df_col_reduction.apply(column_reduction, axis = 1)
-
-    print(df_col_reduction['red_col'])
 
     #Perform normality test
     normality_result = normaltest(df_col_reduction['red_col'])
@@ -103,31 +97,6 @@ def generate_histogram(df, columns, normality_value):
     plt.show()
 
     return similarity_value, df_col_reduction
-
-    # print("Histogram for the test data set.")
-    #
-    # histogram_test_df = df_test_col_reduction['red_col']
-    #
-    # fig = plt.figure(figsize = __FIG_SIZE__)
-    # plt.gcf().clear()
-    #
-    # histogram_test_df.hist(normed = True)
-    # histogram_test_df.plot(kind = 'kde', linewidth = 2, \
-    #                         color = 'r', label = 'Distribution Of Dataset')
-    #
-    #
-    # norm_fit = stats.norm.pdf(np.linspace(-3, 3, len(histogram_test_df)), np.mean(histogram_test_df), np.std(histogram_test_df))
-    # plt.plot(np.linspace(-3, 3, len(histogram_test_df)), norm_fit, label="Normal Distribution", color = 'k', linewidth = 2) # plot it
-    #
-    # plt.xlabel("Dataset Distribution")
-    # plt.ylabel("Frequency")
-    #
-    # plt.title("Similarity to normal distribution: " +str(similarity_value_test)+
-    # ", pvalue: " + str(pvalue_test))
-    #
-    # plt.legend()
-    # plt.show()
-
 
 
 def column_reduction(row):

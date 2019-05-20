@@ -12,7 +12,6 @@ def main():
         for line in lines:
             ClassLabel, Sentence = line
             features = sentiment_analysis.feature_extraction(Sentence)
-            print(features)
             writer.writerow((ClassLabel, Sentence, features['Blob sentiment'], features['Blob subjectivity']))
 
 

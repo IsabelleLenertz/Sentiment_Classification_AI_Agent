@@ -18,12 +18,11 @@ from sklearn.metrics import classification_report, confusion_matrix
 
 def main():
     results = model()
-    print(results)
 
 def model():
     start = time.time()
     features = []
-    with open("../../Data/norm_dist_training.csv", 'r') as file:
+    with open("../Data/norm_dist_training.csv", 'r') as file:
         lines = csv.reader(file, delimiter = ',')
         for line in lines:
             index, ClassLabel, Sentence, SentimentScore, SubjectivityScore = line
@@ -63,7 +62,7 @@ def model():
     # Calculate Accuracy
     accuracy = clf.score(X_test, y_test) * 100
 
-    print("Accuracy of the model: ", "{0:.2f}".format(accuracy))
+    print("Accuracy of the SVM classifier model: ", "{0:.2f}".format(accuracy))
 
     cm = confusion_matrix(y_test, clf_predictions)
 
