@@ -38,16 +38,19 @@ while(userChoice != "p" and userChoice != "s"):
 #Creating models
 print("Creating new models...");
 print("... please wait...");
-
+print("");
+print("Training SVM Model...");
 #create svm model
 classifier, accuracy, sensitivity, specificity, execution_time = svm_classifier.model();
-algo1 = Algorithm('classifier 1', accuracy, execution_time,sensitivity, specificity) #for testing purposes
+algo1 = Algorithm('SVM classifier', accuracy, execution_time,sensitivity, specificity) #for testing purposes
 
+print("")
+print("Training Bag of Words Model...")
 #create bag of world model
 accuracy, sensitivity, specificity, execution_time = bagOfWord.model();
-algo2 = Algorithm('classifier 2', accuracy, execution_time,sensitivity, specificity) #for testing purposes
+algo2 = Algorithm('Bag of Words classifier', accuracy, execution_time,sensitivity, specificity) #for testing purposes
 scores = {};
-
+print("");
 print("Done training the models");
 
 """ Run and score the first algorithm"""
@@ -73,6 +76,6 @@ chosenAlgo = max(scores, key = lambda k: scores[k])
 print("Recommending: " + chosenAlgo.classifier)
 
 """ Asking for text to  classify and classify it """
-text = input("enter the text you want to classify: ")
+#text = input("enter the text you want to classify: ")
 #print(classifier1.predict(text));
 #TODO classify
