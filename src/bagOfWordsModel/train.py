@@ -1,4 +1,4 @@
-# https://www.kaggle.com/c/word2vec-nlp-tutorial/overview/part-1-for-beginners-bag-of-words
+
 import os
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.ensemble import RandomForestClassifier
@@ -64,7 +64,6 @@ def model():
     # Use the random forest to make sentiment label predictions
     # print("Predicting test labels...\n")
     result = forest.predict(test_data_features)
-    print("tupe(results)", type(result))
     # Copy the results to a pandas dataframe with an "id" column and
     # a "sentiment" column
     output = pd.DataFrame( data={"sentiment":result} )
@@ -94,11 +93,6 @@ def model():
             else:
                 positive_correct_count = positive_correct_count+1
                 
-    print("count_correct_class" ,  str(count_correct_class))
-    print("negative_correct_count" , str(negative_correct_count))
-    print("positive_correct_count" , str(positive_correct_count))
-    print("negative_count" , str(negative_count))
-    print("positive_count" , str(positive_count))
     accuracy = (count_correct_class)/len(result)
     sensitivity = negative_correct_count/negative_count
     specificity = positive_correct_count/positive_count
