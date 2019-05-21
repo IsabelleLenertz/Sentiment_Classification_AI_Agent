@@ -21,7 +21,7 @@ def model():
     df_train = pd.read_csv("bagOfWordsModel/training.csv", header=0, delimiter="\t", quoting=3, names = ['sentiment', 'comment'])
     df_test = pd.read_csv("bagOfWordsModel/testdata.csv", header=0, delimiter="\t", quoting=3, names = ['comment'])
     df_test_label = pd.read_csv("bagOfWordsModel/l.csv")
-    labels = np.array(df_test_label)
+    labels = df_test_label["labels"].values
     clean_data = []
     for i in range( 0, len(df_train["comment"])):
         clean_data.append(" ".join(KaggleWord2VecUtility.review_to_wordlist(df_train["comment"][i], True)))
@@ -64,7 +64,7 @@ def model():
     # Use the random forest to make sentiment label predictions
     # print("Predicting test labels...\n")
     result = forest.predict(test_data_features)
-    
+    print("tupe(results)", type(result))
     # Copy the results to a pandas dataframe with an "id" column and
     # a "sentiment" column
     output = pd.DataFrame( data={"sentiment":result} )
@@ -77,22 +77,29 @@ def model():
     negative_count = 0
     positive_count = 0
     negative_correct_count = 0
+    positive_correct_count = 0
     # counitng correct matches in order to calculate accuracy
+    unique, counts = np.unique(result, return_counts=True)
+    count_hash = dict(zip(unique, counts))
+    negative_count = count_hash[1]
+    positive_count = count_hash[0]
+
+    
     for i in range(len(result)):
-        if result[i] == labels[i]:
+        if np.int16(result[i]).item() == labels[i]:
             count_correct_class +=1
-            #counitng correct negative and positive matches
-            if labels[i] == 1:
-                negative_correct_count = +1
+    #         #counitng correct negative and positive matches
+            if bool(labels[i] == 1):
+                negative_correct_count = negative_correct_count+1
             else:
-                positive_correct_count = +1
-        #counitng total negative cases
-        if labels[i] == 1:
-            negative_count = +1
-        #counting total postive cases
-        if labels[i] == 0:
-            positive_count = +1
-    accuracy = (count_correct_class)/1000
+                positive_correct_count = positive_correct_count+1
+                
+    print("count_correct_class" ,  str(count_correct_class))
+    print("negative_correct_count" , str(negative_correct_count))
+    print("positive_correct_count" , str(positive_correct_count))
+    print("negative_count" , str(negative_count))
+    print("positive_count" , str(positive_count))
+    accuracy = (count_correct_class)/len(result)
     sensitivity = negative_correct_count/negative_count
     specificity = positive_correct_count/positive_count
     end = time.time()
