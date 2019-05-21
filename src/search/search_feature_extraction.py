@@ -1,3 +1,8 @@
+
+#
+# author : Jisha Pillai (jisha.pillai@sjsu.edu)
+#
+
 import csv
 import sys
 sys.path.append('../')
@@ -12,7 +17,7 @@ def main():
         for line in lines:
             ClassLabel, Sentence = line
             features = sentiment_analysis.feature_extraction(Sentence)
-            writer.writerow((ClassLabel, Sentence, features['Blob sentiment'], features['Blob subjectivity']))
+            writer.writerow((ClassLabel, Sentence, features['SentimentScore'], features['SentimentSubjectivity']))
 
 
 

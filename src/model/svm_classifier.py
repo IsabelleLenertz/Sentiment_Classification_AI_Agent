@@ -1,6 +1,8 @@
+
 #
 # author : Jisha Pillai (jisha.pillai@sjsu.edu)
 #
+
 import csv
 import nltk
 import math
@@ -26,8 +28,8 @@ def model():
         for line in lines:
             index, ClassLabel, Sentence, SentimentScore, SubjectivityScore = line
             feature = {}
-            feature['Blob sentiment'] = SentimentScore
-            feature['Blob subjectivity'] = SubjectivityScore
+            feature['SentimentScore'] = SentimentScore
+            feature['SentimentSubjectivity'] = SubjectivityScore
             features.append((feature, ClassLabel))
 
     featuresets=np.array(features)
