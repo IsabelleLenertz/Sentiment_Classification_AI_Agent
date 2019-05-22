@@ -45,10 +45,10 @@ classifier, accuracy, sensitivity, specificity, execution_time = svm_classifier.
 algo1 = Algorithm('SVM classifier', accuracy, execution_time,sensitivity, specificity) #for testing purposes
 
 print("")
-print("Training Bag of Words Model...")
+print("Training Random Forest Model...")
 #create bag of world model
 accuracy, sensitivity, specificity, execution_time = bagOfWord.model();
-algo2 = Algorithm('Bag of Words classifier', accuracy, execution_time,sensitivity, specificity) #for testing purposes
+algo2 = Algorithm('Random Forest classifier', accuracy, execution_time,sensitivity, specificity) #for testing purposes
 scores = {};
 print("");
 print("Done training the models");
